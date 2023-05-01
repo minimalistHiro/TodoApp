@@ -11,9 +11,11 @@ struct ToolbarView: View {
     @Environment(\.managedObjectContext) var viewContext
     @EnvironmentObject private var viewModel: TodoListViewModel
     var tasks: FetchedResults<Todo>
+    var count: Int                          // リストの要素数
     
     var body: some View {
         HStack {
+            // 削除ボタン
             Button {
                 if !viewModel.isCheckCount(tasks: tasks) {
                     // チェック項目がない場合,アラートを表示.
@@ -28,12 +30,13 @@ struct ToolbarView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 25)
-                    .foregroundColor($viewModel.editMode.wrappedValue.isEditing ? Color("Disable") : Color("Able"))
+                    .foregroundColor($viewModel.editMode.wrappedValue.isEditing || count == 0 ? Color("Disable") : Color("Able"))
             }
-            .disabled($viewModel.editMode.wrappedValue.isEditing)
+            .disabled($viewModel.editMode.wrappedValue.isEditing || count == 0)
             
             Spacer()
             
+            // プラスボタン
             Button {
                 if viewModel.isPlusAlert {
                     viewModel.addCreateAlertEntity()
@@ -53,6 +56,7 @@ struct ToolbarView: View {
             
             Spacer()
             
+            // 編集ボタン
             Button {
                 if $viewModel.editMode.wrappedValue.isEditing == true {
                     var transaction = Transaction()
@@ -79,9 +83,10 @@ struct ToolbarView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 25)
-                        .foregroundColor(Color("Able"))
+                        .foregroundColor(!$viewModel.editMode.wrappedValue.isEditing && count == 0 ? Color("Disable") : Color("Able"))
                 }
             }
+            .disabled(!$viewModel.editMode.wrappedValue.isEditing && count == 0)
         }
     }
 }

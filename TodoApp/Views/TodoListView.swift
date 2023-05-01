@@ -78,7 +78,7 @@ struct TodoListView: View {
                 })
                 .toolbar {
                     ToolbarItem(placement: .bottomBar) {
-                        ToolbarView(tasks: tasks)
+                        ToolbarView(tasks: tasks, count: mappedTitle.count)
                     }
                 }
                 .alert(viewModel.alertEntity?.title ?? "",
