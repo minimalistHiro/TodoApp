@@ -10,9 +10,8 @@ import SwiftUI
 struct EditView: View {
     @Environment(\.managedObjectContext) var viewContext
     @FocusState private var focus: Field?
-    @StateObject private var viewModel = TodoListViewModel()
+    @EnvironmentObject private var viewModel: TodoListViewModel
     @State var title: String                    // タスクタイトル
-    @Binding var isEditText: Bool               // テキスト編集中の有無
     var task: Todo
 
     var body: some View {
@@ -22,10 +21,10 @@ struct EditView: View {
                 // タスクタイトルが空白でない場合のみ,編集したタスクを作成.
                 if title != "" {
                     viewModel.editTask(context: viewContext, task: task, title: title)
-                    isEditText = false
+                    viewModel.isEditText = false
                     focus = nil
                 } else {
-                    isEditText = false
+                    viewModel.isEditText = false
                     focus = nil
                 }
             }

@@ -10,32 +10,29 @@ import CoreData
 
 struct TodoListView: View {
     @Environment(\.managedObjectContext) var viewContext
-    @State private var editMode: EditMode = .inactive
     @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "createDate", ascending: true)], animation: .default)
     var tasks: FetchedResults<Todo>
     
     @FocusState private var focus: Field?
-    @StateObject private var viewModel = TodoListViewModel()
-    @State private var isPlusAlert = false      // 新規タスク作成時のアラートの有無
+    @EnvironmentObject private var viewModel: TodoListViewModel
     
     var body: some View {
         
         let mappedTitle = tasks.map { value in
             value.title
         }
-        var count = mappedTitle.count               // リストの要素数
         
         NavigationStack {
                 List {
                     ForEach(tasks) { task in
-                        if editMode == .active {
+                        if viewModel.editMode == .active {
                             if let title = task.title {
-                                EditView(title: title, isEditText: $viewModel.isEditText, task: task)
+                                EditView(title: title, task: task)
                                     .focused($focus, equals: .editText)
                             }
                         } else {
                             if let title = task.title {
-                                ListView(editMode: $editMode, title: title, isCheck: task.checked)
+                                ListView(title: title, isCheck: task.checked)
                                     .contentShape(Rectangle())
                                     .onTapGesture {
                                         task.checked.toggle()
@@ -67,26 +64,21 @@ struct TodoListView: View {
                         viewModel.rowDelete(context: viewContext, tasks: tasks, offsets: index)
                     }
                     if viewModel.isEditText == true {
-                        DraftView(alertEntity: $viewModel.alertEntity, title: $viewModel.newTitle, isShowAlert: $viewModel.isShowAlert, isEditText: $viewModel.isEditText, count: count)
+                        DraftView(count: mappedTitle.count)
                             .focused($focus, equals: .newText)
                     }
                 }
                 .padding()
                 .padding(.top, 20)
                 .listStyle(.inset)
-                .environment(\.editMode, $editMode)
+                .environment(\.editMode, $viewModel.editMode)
                 .environment(\.defaultMinListRowHeight, 55)
                 .onChange(of: mappedTitle, perform: { value in
-                    count = value.count
-                    if count >= viewModel.listCount {
-                        isPlusAlert = true
-                    } else {
-                        isPlusAlert = false
-                    }
+                    viewModel.isListCountCheck(count: value.count)
                 })
                 .toolbar {
                     ToolbarItem(placement: .bottomBar) {
-                        ToolbarView(alertEntity: $viewModel.alertEntity, editMode: $editMode, newTitle: $viewModel.newTitle, isShowAlert: $viewModel.isShowAlert, isEditText: $viewModel.isEditText, isPlusAlert: $isPlusAlert, tasks: tasks)
+                        ToolbarView(tasks: tasks)
                     }
                 }
                 .alert(viewModel.alertEntity?.title ?? "",
@@ -137,10 +129,12 @@ struct TodoListView_Previews: PreviewProvider {
             TodoListView()
                 .previewDevice("iPhone 14 Pro")
                 .previewDisplayName("iPhone 14 Pro")
+                .environmentObject(TodoListViewModel())
                 .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
             TodoListView()
                 .previewDevice("iPhone SE (3rd generation)")
                 .previewDisplayName("iPhone SE (3rd generation)")
+                .environmentObject(TodoListViewModel())
                 .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         }
     }

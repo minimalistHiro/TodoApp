@@ -8,10 +8,6 @@
 import SwiftUI
 
 struct ListView: View {
-    @Environment(\.managedObjectContext) var viewContext
-    @FocusState private var focus: Field?
-    @StateObject private var viewModel = TodoListViewModel()
-    @Binding var editMode: EditMode
     let title: String                       // タスクタイトル
     var isCheck: Bool                       // チェックの有無
     

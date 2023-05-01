@@ -10,33 +10,29 @@ import SwiftUI
 struct DraftView: View {
     @Environment(\.managedObjectContext) var viewContext
     @FocusState private var focus: Field?
-    @StateObject private var viewModel = TodoListViewModel()
-    @Binding var alertEntity: AlertEntity?
-    @Binding var title: String              // タスクタイトル
-    @Binding var isShowAlert: Bool          // アラート表示有無
-    @Binding var isEditText: Bool           // テキスト編集中の有無
+    @EnvironmentObject private var viewModel: TodoListViewModel
     var count: Int                          // リストの要素数
     
     var body: some View {
-        TextField("", text: $title)
+        TextField("", text: $viewModel.newTitle)
             .font(.system(size: 20))
             .onSubmit {
                 // タスクタイトルが空白でない場合のみ,新規タスクを作成.
-                if title != "" {
-                    viewModel.createTask(context: viewContext, title: title)
-                    title = ""
+                if viewModel.newTitle != "" {
+                    viewModel.createTask(context: viewContext, title: viewModel.newTitle)
+                    viewModel.newTitle = ""
                     focus = nil
                     // 行数上限アラートが呼ばれたら,テキストを閉じる.そうでない場合,続けてタスクを作成.
                     if count >= viewModel.listCount - 1 {
-                        isEditText = false
+                        viewModel.isEditText = false
                     } else {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                            isEditText = true
+                            viewModel.isEditText = true
                             focus = .newText
                         }
                     }
                 } else {
-                    isEditText = false
+                    viewModel.isEditText = false
                     focus = nil
                 }
             }
@@ -46,9 +42,10 @@ struct DraftView: View {
                     focus = .newText
                 }
             }
-            .onChange(of: title, perform: { value in
+            .onChange(of: viewModel.newTitle, perform: { value in
+                // 最大文字数に達したら、それ以上書き込めないようにする
                 if value.count > viewModel.titleCount {
-                    title.removeLast(title.count - viewModel.titleCount)
+                    viewModel.newTitle.removeLast(viewModel.newTitle.count - viewModel.titleCount)
                 }
             })
             .submitLabel(count >= viewModel.listCount - 1 ? .done : .next)
@@ -57,15 +54,7 @@ struct DraftView: View {
 
 struct DraftView_Previews: PreviewProvider {
     static var previews: some View {
-        DraftView(alertEntity: .constant(
-            AlertEntity(title: "",
-                        message: "全て削除しますか？",
-                        actionText: "削除",
-                        cancelText: "キャンセル",
-                        button: .double)),
-                  title: .constant("title"),
-                  isShowAlert: .constant(false),
-                  isEditText: .constant(false),
-                  count: 5)
+        DraftView(count: 5)
+            .environmentObject(TodoListViewModel())
     }
 }

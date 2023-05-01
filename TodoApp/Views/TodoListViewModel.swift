@@ -11,32 +11,30 @@ import CoreData
 final class TodoListViewModel: ObservableObject {
     
     @Published var alertEntity: AlertEntity?
+    @Published var editMode: EditMode = .inactive       // EditMode変数
     @Published var newTitle: String = ""                // 新規タスクタイトル
     @Published var isShowAlert: Bool = false            // アラート表示有無
     @Published var isEditText: Bool = false             // テキスト編集中の有無
+    @Published var isPlusAlert: Bool = false            // 新規タスク作成時のアラートの有無
     let titleCount: Int = 20                            // タイトルの最大文字数
     let listCount: Int = 80                             // リスト行数の上限
     
     // 削除アラートを作成
-    func addDeleteAlertEntity() -> AlertEntity {
-        let alertEntity = AlertEntity(title: "",
-                                      message: "全て削除しますか？",
-                                      actionText: "削除",
-                                      cancelText: "キャンセル",
-                                      button: .double)
-        return alertEntity
+    func addDeleteAlertEntity() {
+        alertEntity = AlertEntity(title: "",
+                                  message: "全て削除しますか？",
+                                  actionText: "削除",
+                                  cancelText: "キャンセル",
+                                  button: .double)
     }
     
-    
     // 行数上限アラートを作成
-    func addCreateAlertEntity() -> AlertEntity {
-        let alertEntity = AlertEntity(title: "",
-                                      message: "リストの上限に達しました。",
-                                      actionText: "OK",
-                                      cancelText: "",
-                                      button: .single)
-
-        return alertEntity
+    func addCreateAlertEntity() {
+        alertEntity = AlertEntity(title: "",
+                                  message: "リストの上限に達しました。",
+                                  actionText: "OK",
+                                  cancelText: "",
+                                  button: .single)
     }
     
     // チェック項目の有無を調べる
@@ -53,6 +51,15 @@ final class TodoListViewModel: ObservableObject {
             return true
         } else {
             return false
+        }
+    }
+    
+    // リスト数が上限に達したら,アラートを表示する.
+    func isListCountCheck(count: Int) {
+        if count >= listCount {
+            isPlusAlert = true
+        } else {
+            isPlusAlert = false
         }
     }
     
