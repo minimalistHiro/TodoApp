@@ -1,13 +1,13 @@
 //
-//  ToolbarView.swift
+//  BotombarVIew.swift
 //  TodoApp
 //
-//  Created by 金子広樹 on 2023/04/19.
+//  Created by 金子広樹 on 2023/05/19.
 //
 
 import SwiftUI
 
-struct ToolbarView: View {
+struct BotombarVIew: View {
     @Environment(\.managedObjectContext) var viewContext
     @EnvironmentObject private var viewModel: TodoListViewModel
     var tasks: FetchedResults<Todo>
@@ -46,11 +46,19 @@ struct ToolbarView: View {
                     viewModel.isEditText = true
                 }
             } label: {
-                Image(systemName: "plus")
+                Image(systemName: "circle.fill")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 25)
+                    .frame(width: 60)
                     .foregroundColor($viewModel.editMode.wrappedValue.isEditing ? Color("Disable") : Color("Able"))
+                    .overlay {
+                        Image(systemName: "plus")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20)
+                            .bold()
+                            .foregroundColor($viewModel.editMode.wrappedValue.isEditing ? Color("Able") : Color("Disable"))
+                    }
             }
             .disabled($viewModel.editMode.wrappedValue.isEditing)
             
@@ -79,7 +87,7 @@ struct ToolbarView: View {
                         .frame(width: 25)
                         .foregroundColor(Color("Able"))
                 } else {
-                    Image(systemName: "square.and.pencil")
+                    Image(systemName: "pencil")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 25)

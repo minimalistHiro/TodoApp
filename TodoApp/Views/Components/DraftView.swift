@@ -48,6 +48,31 @@ struct DraftView: View {
                     viewModel.newTitle.removeLast(viewModel.newTitle.count - viewModel.titleCount)
                 }
             })
+            .toolbar {
+                ToolbarItem(placement: .keyboard) {
+                    HStack {
+                        Spacer()
+                        Button {
+                            // タスクタイトルが空白でない場合のみ,新規タスクを作成.
+                            if viewModel.newTitle != "" {
+                                viewModel.createTask(context: viewContext, title: viewModel.newTitle)
+                                viewModel.newTitle = ""
+                                viewModel.isEditText = false
+                                focus = nil
+                            } else {
+                                viewModel.isEditText = false
+                                focus = nil
+                            }
+                        } label: {
+                            Image(systemName: "checkmark")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 25)
+                                .foregroundColor(Color("Able"))
+                        }
+                    }
+                }
+            }
             .submitLabel(count >= viewModel.listCount - 1 ? .done : .next)
     }
 }

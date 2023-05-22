@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		FD1CDA4C29EF9EB500AC6F05 /* ToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1CDA4B29EF9EB500AC6F05 /* ToolbarView.swift */; };
+		FD38ACDF2A17478C005C9DEA /* PlusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD38ACDE2A17478C005C9DEA /* PlusButton.swift */; };
+		FD38ACE12A174831005C9DEA /* DeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD38ACE02A174831005C9DEA /* DeleteButton.swift */; };
 		FD41B51829FA4D6F008E3F94 /* TodoAppProfile.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = FD41B51729FA4D6F008E3F94 /* TodoAppProfile.mobileprovision */; };
 		FD5FEA7D29F6737D002B3F2E /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5FEA7C29F6737D002B3F2E /* ListView.swift */; };
 		FD9D953929F23DB90058BCB4 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9D953829F23DB80058BCB4 /* ViewExtension.swift */; };
@@ -24,6 +26,8 @@
 
 /* Begin PBXFileReference section */
 		FD1CDA4B29EF9EB500AC6F05 /* ToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarView.swift; sourceTree = "<group>"; };
+		FD38ACDE2A17478C005C9DEA /* PlusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusButton.swift; sourceTree = "<group>"; };
+		FD38ACE02A174831005C9DEA /* DeleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButton.swift; sourceTree = "<group>"; };
 		FD41B51729FA4D6F008E3F94 /* TodoAppProfile.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; path = TodoAppProfile.mobileprovision; sourceTree = SOURCE_ROOT; };
 		FD41B55929FE5A08008E3F94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		FD5FEA7C29F6737D002B3F2E /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
@@ -51,6 +55,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FD38ACE22A186C33005C9DEA /* Unused */ = {
+			isa = PBXGroup;
+			children = (
+				FDC46D6129EBD5A2007C9776 /* EditView.swift */,
+				FD1CDA4B29EF9EB500AC6F05 /* ToolbarView.swift */,
+			);
+			path = Unused;
+			sourceTree = "<group>";
+		};
 		FD9D953729F23DA20058BCB4 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +96,7 @@
 				FDC46D5329EBA78E007C9776 /* Views */,
 				FDC46D5529EBA7B8007C9776 /* Model */,
 				FD9D953729F23DA20058BCB4 /* Extension */,
+				FD38ACE22A186C33005C9DEA /* Unused */,
 				FDC46D4829EBA739007C9776 /* Assets.xcassets */,
 				FDC46D4A29EBA739007C9776 /* Preview Content */,
 			);
@@ -121,8 +135,8 @@
 			children = (
 				FD5FEA7C29F6737D002B3F2E /* ListView.swift */,
 				FDC46D5829EBA7F1007C9776 /* DraftView.swift */,
-				FDC46D6129EBD5A2007C9776 /* EditView.swift */,
-				FD1CDA4B29EF9EB500AC6F05 /* ToolbarView.swift */,
+				FD38ACDE2A17478C005C9DEA /* PlusButton.swift */,
+				FD38ACE02A174831005C9DEA /* DeleteButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -207,6 +221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD38ACDF2A17478C005C9DEA /* PlusButton.swift in Sources */,
 				FD9D953929F23DB90058BCB4 /* ViewExtension.swift in Sources */,
 				FDC46D6029EBA879007C9776 /* Persistent.swift in Sources */,
 				FD5FEA7D29F6737D002B3F2E /* ListView.swift in Sources */,
@@ -214,6 +229,7 @@
 				FD1CDA4C29EF9EB500AC6F05 /* ToolbarView.swift in Sources */,
 				FDC46D6229EBD5A2007C9776 /* EditView.swift in Sources */,
 				FDC46D5E29EBA817007C9776 /* Todo.xcdatamodeld in Sources */,
+				FD38ACE12A174831005C9DEA /* DeleteButton.swift in Sources */,
 				FDC46D5729EBA7E0007C9776 /* TodoListViewModel.swift in Sources */,
 				FDC46D4529EBA737007C9776 /* TodoAppApp.swift in Sources */,
 				FDC46D5929EBA7F1007C9776 /* DraftView.swift in Sources */,
@@ -343,7 +359,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"TodoApp/Preview Content\"";
 				DEVELOPMENT_TEAM = T9U9A227FB;
 				ENABLE_PREVIEWS = YES;
@@ -360,7 +376,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hiroki.TodoApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -375,7 +391,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"TodoApp/Preview Content\"";
 				DEVELOPMENT_TEAM = T9U9A227FB;
 				ENABLE_PREVIEWS = YES;
@@ -392,7 +408,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hiroki.TodoApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

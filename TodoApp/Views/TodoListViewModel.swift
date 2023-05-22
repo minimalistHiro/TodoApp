@@ -11,13 +11,16 @@ import CoreData
 final class TodoListViewModel: ObservableObject {
     
     @Published var alertEntity: AlertEntity?
-    @Published var editMode: EditMode = .inactive       // EditMode変数
+//    @Published var editMode: EditMode = .inactive       // EditMode変数
     @Published var newTitle: String = ""                // 新規タスクタイトル
     @Published var isShowAlert: Bool = false            // アラート表示有無
     @Published var isEditText: Bool = false             // テキスト編集中の有無
     @Published var isPlusAlert: Bool = false            // 新規タスク作成時のアラートの有無
+    @Published var isShowPlusButton: Bool = true        // プラスボタンの表示有無
+    @Published var isShowDeleteButton: Bool = true      // 削除ボタンの表示有無
     let titleCount: Int = 20                            // タイトルの最大文字数
     let listCount: Int = 80                             // リスト行数の上限
+    let spacer: Int = 2                                 // リストの下部スペースの数
     
     // 削除アラートを作成
     func addDeleteAlertEntity() {
@@ -38,7 +41,7 @@ final class TodoListViewModel: ObservableObject {
     }
     
     // チェック項目の有無を調べる
-    func isCheckCount(tasks: FetchedResults<Todo>) -> Bool {
+    func isCheckCheckedCount(tasks: FetchedResults<Todo>) -> Bool {
         var checkCount: Int = 0
         
         for task in tasks {
@@ -55,7 +58,7 @@ final class TodoListViewModel: ObservableObject {
     }
     
     // リスト数が上限に達したら,アラートを表示する.
-    func isListCountCheck(count: Int) {
+    func checkListCount(count: Int) {
         if count >= listCount {
             isPlusAlert = true
         } else {
@@ -63,8 +66,22 @@ final class TodoListViewModel: ObservableObject {
         }
     }
     
+    // プラスボタンと削除ボタンの表示有無を判定.
+    func checkEnableButtons(count: Int) {
+        if isEditText == true {
+            isShowPlusButton = false
+            isShowDeleteButton = false
+        } else if count == 0 {
+            isShowPlusButton = true
+            isShowDeleteButton = false
+        } else {
+            isShowPlusButton = true
+            isShowDeleteButton = true
+        }
+    }
+    
     // リストカラー.true = 黄色, false = 白
-    func listColor(context: NSManagedObjectContext, task: Todo) -> Color {
+    func checkListColor(context: NSManagedObjectContext, task: Todo) -> Color {
         if task.color {
             return Color("Highlight")
         } else {
@@ -78,14 +95,13 @@ final class TodoListViewModel: ObservableObject {
         newTask.title = title
         newTask.checked = false
         newTask.createDate = Date()
+        newTask.color = false
         saveContext(context: context)
     }
     
-    // タスクを編集
-    func editTask(context: NSManagedObjectContext, task: Todo, title: String) {
+    // タスクを更新
+    func updateTask(context: NSManagedObjectContext, task: Todo, title: String) {
         task.title = title
-        task.checked = task.checked
-        task.createDate = task.createDate
         saveContext(context: context)
     }
     
