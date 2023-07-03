@@ -17,7 +17,7 @@ struct ListView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 30)
-                .foregroundColor(Color("Able"))
+                .foregroundColor(able)
                 .padding(.trailing, 5)
             if isCheck {
                 Text(title)

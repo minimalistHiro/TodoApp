@@ -68,7 +68,7 @@ struct DraftView: View {
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 25)
-                                .foregroundColor(Color("Able"))
+                                .foregroundColor(able)
                         }
                     }
                 }

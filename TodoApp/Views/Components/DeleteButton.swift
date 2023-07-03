@@ -37,6 +37,12 @@ struct DeleteButton: View {
                         .bold()
                         .foregroundColor(Color("Disable"))
                 }
+//            Image(systemName: "trash")
+//                .resizable()
+//                .scaledToFit()
+//                .frame(width: 25)
+//                .bold()
+//                .foregroundColor(viewModel.isShowDeleteButton ? able : disable)
         }
         .disabled(viewModel.isShowDeleteButton == false)
     }

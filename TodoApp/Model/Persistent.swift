@@ -61,3 +61,9 @@ struct PersistenceController {
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
 }
+
+// 固定色
+let able: Color = Color("Able")                         // 文字・ボタン色
+let disable: Color = Color("Disable")                   // 背景色
+let highlight: Color = Color("Highlight")               // 強調色
+

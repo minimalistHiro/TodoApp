@@ -18,7 +18,7 @@ final class TodoListViewModel: ObservableObject {
     @Published var isPlusAlert: Bool = false            // 新規タスク作成時のアラートの有無
     @Published var isShowPlusButton: Bool = true        // プラスボタンの表示有無
     @Published var isShowDeleteButton: Bool = true      // 削除ボタンの表示有無
-    let titleCount: Int = 20                            // タイトルの最大文字数
+    let titleCount: Int = 25                            // タイトルの最大文字数
     let listCount: Int = 80                             // リスト行数の上限
     let spacer: Int = 2                                 // リストの下部スペースの数
     
@@ -83,9 +83,9 @@ final class TodoListViewModel: ObservableObject {
     // リストカラー.true = 黄色, false = 白
     func checkListColor(context: NSManagedObjectContext, task: Todo) -> Color {
         if task.color {
-            return Color("Highlight")
+            return highlight
         } else {
-            return Color("Disable")
+            return disable
         }
     }
     

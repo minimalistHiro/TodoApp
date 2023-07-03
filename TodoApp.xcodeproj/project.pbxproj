@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FD1CDA4C29EF9EB500AC6F05 /* ToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1CDA4B29EF9EB500AC6F05 /* ToolbarView.swift */; };
+		FD2694922A51932800B0500A /* ForEachView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2694912A51932800B0500A /* ForEachView.swift */; };
 		FD38ACDF2A17478C005C9DEA /* PlusButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD38ACDE2A17478C005C9DEA /* PlusButton.swift */; };
 		FD38ACE12A174831005C9DEA /* DeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD38ACE02A174831005C9DEA /* DeleteButton.swift */; };
 		FD41B51829FA4D6F008E3F94 /* TodoAppProfile.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = FD41B51729FA4D6F008E3F94 /* TodoAppProfile.mobileprovision */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		FD1CDA4B29EF9EB500AC6F05 /* ToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarView.swift; sourceTree = "<group>"; };
+		FD2694912A51932800B0500A /* ForEachView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForEachView.swift; sourceTree = "<group>"; };
 		FD38ACDE2A17478C005C9DEA /* PlusButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusButton.swift; sourceTree = "<group>"; };
 		FD38ACE02A174831005C9DEA /* DeleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButton.swift; sourceTree = "<group>"; };
 		FD41B51729FA4D6F008E3F94 /* TodoAppProfile.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; path = TodoAppProfile.mobileprovision; sourceTree = SOURCE_ROOT; };
@@ -60,16 +62,9 @@
 			children = (
 				FDC46D6129EBD5A2007C9776 /* EditView.swift */,
 				FD1CDA4B29EF9EB500AC6F05 /* ToolbarView.swift */,
-			);
-			path = Unused;
-			sourceTree = "<group>";
-		};
-		FD9D953729F23DA20058BCB4 /* Extension */ = {
-			isa = PBXGroup;
-			children = (
 				FD9D953829F23DB80058BCB4 /* ViewExtension.swift */,
 			);
-			path = Extension;
+			path = Unused;
 			sourceTree = "<group>";
 		};
 		FDC46D3829EBA737007C9776 = {
@@ -95,7 +90,6 @@
 				FDC46D5229EBA75C007C9776 /* App */,
 				FDC46D5329EBA78E007C9776 /* Views */,
 				FDC46D5529EBA7B8007C9776 /* Model */,
-				FD9D953729F23DA20058BCB4 /* Extension */,
 				FD38ACE22A186C33005C9DEA /* Unused */,
 				FDC46D4829EBA739007C9776 /* Assets.xcassets */,
 				FDC46D4A29EBA739007C9776 /* Preview Content */,
@@ -133,6 +127,7 @@
 		FDC46D5429EBA7AA007C9776 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				FD2694912A51932800B0500A /* ForEachView.swift */,
 				FD5FEA7C29F6737D002B3F2E /* ListView.swift */,
 				FDC46D5829EBA7F1007C9776 /* DraftView.swift */,
 				FD38ACDE2A17478C005C9DEA /* PlusButton.swift */,
@@ -233,6 +228,7 @@
 				FDC46D5729EBA7E0007C9776 /* TodoListViewModel.swift in Sources */,
 				FDC46D4529EBA737007C9776 /* TodoAppApp.swift in Sources */,
 				FDC46D5929EBA7F1007C9776 /* DraftView.swift in Sources */,
+				FD2694922A51932800B0500A /* ForEachView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

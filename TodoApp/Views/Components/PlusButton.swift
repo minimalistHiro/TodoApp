@@ -23,15 +23,15 @@ struct PlusButton: View {
             Image(systemName: "circle.fill")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 60)
-                .foregroundColor(Color("Able"))
+                .frame(width: 40)
+                .foregroundColor(viewModel.isShowPlusButton ? able : disable)
                 .overlay {
                     Image(systemName: "plus")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 25)
+                        .frame(width: 20)
                         .bold()
-                        .foregroundColor(Color("Disable"))
+                        .foregroundColor(disable)
                 }
         }
         .disabled(viewModel.isShowPlusButton == false)
